@@ -20,6 +20,11 @@ Requirements:
 """
 import time
 import nltk
+
+# Ensure NLTK data is ready BEFORE importing DP/ML which depend on it
+for pkg in ["punkt", "punkt_tab", "stopwords", "wordnet", "averaged_perceptron_tagger", "averaged_perceptron_tagger_eng"]:
+    nltk.download(pkg, quiet=True)
+
 import spacy
 import streamlit as st
 
@@ -71,13 +76,6 @@ st.markdown(
 # ---------------------------------------------------------------------------
 @st.cache_resource(show_spinner=False)
 def load_model() -> SpadeModel:
-    # Ensure NLTK data is ready
-    for pkg in ["punkt", "punkt_tab", "stopwords", "wordnet", "averaged_perceptron_tagger", "averaged_perceptron_tagger_eng"]:
-        try:
-            nltk.data.find(f"tokenizers/{pkg}" if "punkt" in pkg else f"corpora/{pkg}")
-        except LookupError:
-            nltk.download(pkg, quiet=True)
-            
     return SpadeModel()
 
 
