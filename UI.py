@@ -47,6 +47,11 @@ st.set_page_config(
 st.markdown(
     """
     <style>
+        /* Hide Streamlit header, footer and menu */
+        header {visibility: hidden;}
+        footer {visibility: hidden;}
+        #MainMenu {visibility: hidden;}
+
         .main .block-container { padding-top: 2rem; max-width: 900px; }
         .stTextArea textarea { font-size: 14px; }
         .verdict-spam {
